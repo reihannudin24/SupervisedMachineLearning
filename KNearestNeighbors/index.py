@@ -22,9 +22,15 @@ from matplotlib.colors import ListedColormap
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report
+from sklearn.preprocessing import LabelEncoder
+
 
 # Load dataset
 df = pd.read_csv('../0_Data/Iris.csv')
+
+# konversi 'Species' ke numerik menggunakan LabelEncoder
+le = LabelEncoder()
+df['Species'] = le.fit_transform(df['Species'])
 
 # Periksa tipe data
 print(df.dtypes)
@@ -79,15 +85,15 @@ cmap_bold = ListedColormap(['#FF0000', '#00FF00', '#0000FF'])
 
 print("Z : ", Z)
 
-# plt.pcolormesh(xx, yy, Z, cmap=cmap_light)
-#
-# # Plot juga data latih dan data uji
-# plt.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cmap_bold, edgecolor='k', s=20, label='Training data')
-# plt.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=cmap_bold, edgecolor='k', marker='s', s=30, label='Testing data')
-# plt.xlim(xx.min(), xx.max())
-# plt.ylim(yy.min(), yy.max())
-# plt.title("K-Nearest Neighbors (k=3)")
-# plt.xlabel('Sepal length')
-# plt.ylabel('Sepal width')
-# plt.legend()
-# plt.show()
+plt.pcolormesh(xx, yy, Z, cmap=cmap_light)
+
+# Plot juga data latih dan data uji
+plt.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cmap_bold, edgecolor='k', s=20, label='Training data')
+plt.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=cmap_bold, edgecolor='k', marker='s', s=30, label='Testing data')
+plt.xlim(xx.min(), xx.max())
+plt.ylim(yy.min(), yy.max())
+plt.title("K-Nearest Neighbors (k=3)")
+plt.xlabel('Sepal length')
+plt.ylabel('Sepal width')
+plt.legend()
+plt.show()
